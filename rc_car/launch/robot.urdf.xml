@@ -101,7 +101,7 @@
     <parent link="ego_racecar/base_link"/>
     <child link="ego_racecar/back_right_wheel"/>
     <origin rpy="0 0 0" xyz="0 -0.12065 0.0508"/>
-    <axis xyz="0 -1 0"/>
+    <axis xyz="0 1 0"/>
   </joint>
   <link name="ego_racecar/back_right_wheel">
     <visual>
@@ -155,11 +155,13 @@
     <material>Gazebo/Blue</material>
   </gazebo>
   <!-- FRONT RIGHT HINGE -->
-  <joint name="base_to_front_right_hinge" type="continuous">
+  <joint name="base_to_front_right_hinge" type="revolute">
     <parent link="ego_racecar/base_link"/>
     <child link="ego_racecar/front_right_hinge"/>
     <origin xyz="0.3302 -0.12065 0.0508"/>
-    <axis xyz="0 0 -1"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="100" lower="-1" upper="1" velocity="1"/>
+    <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link name="ego_racecar/front_right_hinge">
     <visual>
@@ -184,12 +186,11 @@
     <material>Gazebo/Blue</material>
   </gazebo>
   <!-- FRONT RIGHT WHEEL -->
-  <joint name="front_right_hinge_to_wheel" type="revolute">
+  <joint name="front_right_hinge_to_wheel" type="continuous">
     <parent link="ego_racecar/front_right_hinge"/>
     <child link="ego_racecar/front_right_wheel"/>
     <origin xyz="0 0 0"/>
-    <limit effort="100" lower="-1" upper="1" velocity="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
+    <axis xyz="0 1 0"/>
   </joint>
   <link name="ego_racecar/front_right_wheel">
     <visual>
@@ -214,11 +215,13 @@
     <material>Gazebo/Blue</material>
   </gazebo>
   <!-- FRONT LEFT HINGE -->
-  <joint name="base_to_front_left_hinge" type="continuous">
+  <joint name="base_to_front_left_hinge" type="revolute">
     <parent link="ego_racecar/base_link"/>
     <child link="ego_racecar/front_left_hinge"/>
     <origin xyz="0.3302 0.12065 0.0508"/>
     <axis xyz="0 0 1"/>
+    <limit effort="100" lower="-1" upper="1" velocity="1"/>
+    <dynamics damping="0.0" friction="0.0"/>
   </joint>
   <link name="ego_racecar/front_left_hinge">
     <visual>
@@ -243,12 +246,11 @@
     <material>Gazebo/Blue</material>
   </gazebo>
   <!-- FRONT LEFT WHEEL -->
-  <joint name="front_left_hinge_to_wheel" type="revolute">
+  <joint name="front_left_hinge_to_wheel" type="continuous">
     <parent link="ego_racecar/front_left_hinge"/>
     <child link="ego_racecar/front_left_wheel"/>
     <origin xyz="0 0 0"/>
-    <limit effort="100" lower="-1" upper="1" velocity="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
+    <axis xyz="0 1 0"/>
   </joint>
   <link name="ego_racecar/front_left_wheel">
     <visual>

@@ -91,7 +91,7 @@
     <parent link="${car_name}/base_link"/>
     <child link="${car_name}/back_right_wheel"/>
     <origin xyz="0 ${-(wheel_length+width)/2} ${wheel_radius}" rpy="0 0 0" />
-    <axis xyz="0 -1 0"/>
+    <axis xyz="0 1 0"/>
   </joint>
 
   <link name="${car_name}/back_right_wheel">
@@ -147,12 +147,13 @@
     </gazebo>
 
   <!-- FRONT RIGHT HINGE -->
-  <joint name="base_to_front_right_hinge" type="continuous">
+  <joint name="base_to_front_right_hinge" type="revolute">
     <parent link="${car_name}/base_link"/>
     <child link="${car_name}/front_right_hinge"/>
     <origin xyz="${wheelbase} ${-(wheel_length+width)/2} ${wheel_radius}"/>
-    <axis xyz="0 0 -1"/>
-  </joint>
+    <axis xyz="0 0 1"/>
+    <limit effort="100" velocity="1" lower="-1" upper="1"/>
+    <dynamics damping="0.0" friction="0.0"/>  </joint>
 
   <link name="${car_name}/front_right_hinge">
  <visual>
@@ -177,12 +178,11 @@
     </gazebo>
 
   <!-- FRONT RIGHT WHEEL -->
-  <joint name="front_right_hinge_to_wheel" type="revolute">
+  <joint name="front_right_hinge_to_wheel" type="continuous">
     <parent link="${car_name}/front_right_hinge"/>
     <child link="${car_name}/front_right_wheel"/>
     <origin xyz="0 0 0"/>
-    <limit effort="100" velocity="1" lower="-1" upper="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
+    <axis xyz="0 1 0"/>
   </joint>
 
   <link name="${car_name}/front_right_wheel">
@@ -208,12 +208,14 @@
     </gazebo>
 
   <!-- FRONT LEFT HINGE -->
-  <joint name="base_to_front_left_hinge" type="continuous">
+  <joint name="base_to_front_left_hinge" type="revolute">
     <parent link="${car_name}/base_link"/>
     <child link="${car_name}/front_left_hinge"/>
     <origin xyz="${wheelbase} ${(wheel_length+width)/2} ${wheel_radius}"/>
     <axis xyz="0 0 1"/>
-  </joint>
+    <limit effort="100" velocity="1" lower="-1" upper="1"/>
+    <dynamics damping="0.0" friction="0.0"/>
+    </joint>
 
   <link name="${car_name}/front_left_hinge" >
    <visual>
@@ -238,12 +240,13 @@
     </gazebo>
 
   <!-- FRONT LEFT WHEEL -->
-  <joint name="front_left_hinge_to_wheel" type="revolute">
+  <joint name="front_left_hinge_to_wheel" type="continuous">
     <parent link="${car_name}/front_left_hinge"/>
     <child link="${car_name}/front_left_wheel"/>
     <origin xyz="0 0 0"/>
-    <limit effort="100" velocity="1" lower="-1" upper="1"/>
-    <dynamics damping="0.0" friction="0.0"/>
+    <axis xyz="0 1 0"/>
+
+
   </joint>
 
   <link name="${car_name}/front_left_wheel">
