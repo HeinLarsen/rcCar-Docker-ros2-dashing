@@ -166,13 +166,13 @@
   <link name="ego_racecar/front_right_hinge">
     <visual>
       <geometry>
-        <cylinder length="0.0381" radius="0.0508"/>
+        <cylinder length="0.009525" radius="0.0127"/>
       </geometry>
       <origin rpy="-1.5707963267948966 0 0"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.0381" radius="0.0508"/>
+        <cylinder length="0.009525" radius="0.0127"/>
       </geometry>
       <origin rpy="-1.5707963267948966 0 0"/>
     </collision>
@@ -226,13 +226,13 @@
   <link name="ego_racecar/front_left_hinge">
     <visual>
       <geometry>
-        <cylinder length="0.0381" radius="0.0508"/>
+        <cylinder length="0.009525" radius="0.0127"/>
       </geometry>
       <origin rpy="1.5707963267948966 0 0"/>
     </visual>
     <collision>
       <geometry>
-        <cylinder length="0.0381" radius="0.0508"/>
+        <cylinder length="0.009525" radius="0.0127"/>
       </geometry>
       <origin rpy="1.5707963267948966 0 0"/>
     </collision>
@@ -257,7 +257,7 @@
       <geometry>
         <cylinder length="0.0381" radius="0.0508"/>
       </geometry>
-      <origin rpy="1.5707963267948966 0 0"/>
+      <origin rpy="1.5707963267948966 0 0" xyz="0 0.005 0"/>
     </visual>
     <collision>
       <geometry>

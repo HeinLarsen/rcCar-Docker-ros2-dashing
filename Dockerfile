@@ -18,6 +18,7 @@ RUN apt-get update --fix-missing && \
   psmisc \
   python3-pip \
   ros-dashing-joint-state-publisher-gui \
+  ros-dashing-teleop-* \
   ros-dashing-xacro \
   tmux \
   ros-dashing-gazebo11-* \
