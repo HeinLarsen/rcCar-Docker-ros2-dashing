@@ -1,0 +1,55 @@
+-- The C compiler identification is GNU 7.5.0
+-- The CXX compiler identification is GNU 7.5.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found ament_cmake: 0.7.6 (/opt/ros/dashing/share/ament_cmake/cmake)
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.6.9", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Override CMake install command with custom implementation using symlinks instead of copying resources
+-- Found rclcpp: 0.7.16 (/opt/ros/dashing/share/rclcpp/cmake)
+-- Found rosidl_adapter: 0.7.10 (/opt/ros/dashing/share/rosidl_adapter/cmake)
+-- Found rmw_implementation_cmake: 0.7.2 (/opt/ros/dashing/share/rmw_implementation_cmake/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Looking for pthread.h
+-- Looking for pthread.h - found
+-- Looking for pthread_create
+-- Looking for pthread_create - not found
+-- Looking for pthread_create in pthreads
+-- Looking for pthread_create in pthreads - not found
+-- Looking for pthread_create in pthread
+-- Looking for pthread_create in pthread - found
+-- Found Threads: TRUE  
+-- Found geometry_msgs: 0.7.1 (/opt/ros/dashing/share/geometry_msgs/cmake)
+-- Found ament_lint_auto: 0.7.12 (/opt/ros/dashing/share/ament_lint_auto/cmake)
+-- Added test 'copyright' to check for copyright in CMake / C / C++ / Python code
+-- Added test 'cppcheck' to perform static code analysis on C / C++ code
+-- Configured cppcheck include dirs: 
+-- Added test 'cpplint' to check C / C++ code against the Google style
+-- Added test 'lint_cmake' to check CMake code style
+-- Added test 'uncrustify' to check C / C++ code style
+-- Added test 'xmllint' to check XML markup files
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /ros2_ws/src/cc_car/build/cc_car
+Scanning dependencies of target cc_car
+[ 50%] Building CXX object CMakeFiles/cc_car.dir/src/cc_car.cpp.o
+[01m[K/ros2_ws/src/cc_car/src/cc_car.cpp:19:10:[m[K [01;31m[Kfatal error: [m[Kgeometry_msgs/msg/Twist.hpp: No such file or directory
+ #include [01;31m[K"geometry_msgs/msg/Twist.hpp"[m[K
+          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+CMakeFiles/cc_car.dir/build.make:62: recipe for target 'CMakeFiles/cc_car.dir/src/cc_car.cpp.o' failed
+make[2]: *** [CMakeFiles/cc_car.dir/src/cc_car.cpp.o] Error 1
+make[1]: *** [CMakeFiles/cc_car.dir/all] Error 2
+CMakeFiles/Makefile2:67: recipe for target 'CMakeFiles/cc_car.dir/all' failed
+make: *** [all] Error 2
+Makefile:140: recipe for target 'all' failed

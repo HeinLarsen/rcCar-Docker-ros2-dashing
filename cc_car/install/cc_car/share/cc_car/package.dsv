@@ -1,0 +1,5 @@
+source;share/cc_car/local_setup.bash
+source;share/cc_car/local_setup.dsv
+source;share/cc_car/local_setup.ps1
+source;share/cc_car/local_setup.sh
+source;share/cc_car/local_setup.zsh

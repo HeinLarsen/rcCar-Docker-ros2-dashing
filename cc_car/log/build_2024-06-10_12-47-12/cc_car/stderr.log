@@ -1,0 +1,7 @@
+[01m[K/ros2_ws/src/cc_car/src/cc_car.cpp:19:10:[m[K [01;31m[Kfatal error: [m[Kgeometry_msgs/msg/Twist.hpp: No such file or directory
+ #include [01;31m[K"geometry_msgs/msg/Twist.hpp"[m[K
+          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make[2]: *** [CMakeFiles/cc_car.dir/src/cc_car.cpp.o] Error 1
+make[1]: *** [CMakeFiles/cc_car.dir/all] Error 2
+make: *** [all] Error 2
