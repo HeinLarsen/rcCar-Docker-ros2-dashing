@@ -22,7 +22,9 @@ RUN apt-get update --fix-missing && \
   ros-dashing-xacro \
   tmux \
   ros-dashing-gazebo11-* \
-  curl
+  curl \
+  ros-dashing-slam-toolbox \
+  ros-dashing-robot-localization
 
 # Check dependencies for libgazebo11
 RUN apt-get update && \
