@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+
+<!-- A simple model of the racecar for rviz -->
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="racecar">
+
+  <xacro:property name="wheelbase" value="0.3302" />
+  <xacro:property name="width" value="0.2032" />
+  <xacro:property name="height" value="0.1" />
+  <xacro:property name="ground_offset" value="0.04" />
+  <xacro:property name="wheel_radius" value="0.0508" />
+  <xacro:property name="wheel_length" value="0.0381" />
+  <xacro:property name="laser_distance_from_body" value="0.275" />
+  <xacro:property name="laser_height" value="0.05" />
+  <xacro:property name="laser_radius" value="0.026" />
+  <xacro:property name="car_name" value="ego_racecar" />
+  <xacro:include filename="inertial_macros.xacro" />
+  <!-- <xacro:include filename="gazebo_control.xacro" /> -->
+
+
+  <material name="white">
+    <color rgba="1 1 1 1" />
+  </material>
+
+  <material name="orange">
+    <color rgba="1 0.3 0.1 1" />
+  </material>
+
+  <material name="blue">
+    <color rgba="0.2 0.2 1 1" />
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1" />
+  </material>
+
+  <link name="base_link">
+
+  </link>
+
+  <!-- BASE -->
+
+  <link name="ego_racecar/body">
+    <visual>
+      <origin xyz="${wheelbase/2} 0 ${ground_offset+height/2}" />
+      <geometry>
+        <box size="${wheelbase} ${width} ${height}" />
+      </geometry>
+    </visual>
+    <collision>
+      <origin xyz="${wheelbase/2} 0 ${ground_offset+height/2}" />
+      <geometry>
+        <box size="${wheelbase} ${width} ${height}" />
+      </geometry>
+    </collision>
+    <xacro:inertial_box mass="0.5" x="${wheelbase}" y="${width}" z="${height}">
+      <origin xyz="${wheelbase} ${width} ${height}" rpy="0 0 0" />
+    </xacro:inertial_box>
+  </link>
+
+  <gazebo reference="ego_racecar/body">
+    <material>Gazebo/black</material>
+  </gazebo>
+
+
+  <joint name="base_to_body" type="fixed">
+    <parent link="base_link" />
+    <child link="ego_racecar/body" />
+  </joint>
+
+  <!-- LASER -->
+
+
+  <link name="ego_racecar/laser_model">
+    <visual>
+      <geometry>
+        <cylinder radius="${laser_radius}" length="${laser_height}" />
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${laser_radius}" length="${laser_height}" />
+      </geometry>
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${laser_radius}" length="${laser_height}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/back_right_wheel">
+    <material>Gazebo/black</material>
+  </gazebo>
+
+  <joint name="base_to_laser_model" type="fixed">
+    <parent link="ego_racecar/body" />
+    <child link="ego_racecar/laser_model" />
+    <origin xyz="${laser_distance_from_body} 0 ${ground_offset+height+(laser_height/2)}" />
+  </joint>
+
+
+  <!-- BACK RIGHT WHEEL -->
+
+  <link name="ego_racecar/back_right_hinge">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/back_right_hinge">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+  <link name="ego_racecar/back_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/back_right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <joint name="back_right_hinge_to_wheel" type="continuous">
+    <parent link="ego_racecar/back_right_hinge" />
+    <child link="ego_racecar/back_right_wheel" />
+    <origin xyz="0 -0.05 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+
+  <joint name="base_to_back_right_wheel" type="fixed">
+    <parent link="ego_racecar/body" />
+    <child link="ego_racecar/back_right_hinge" />
+    <origin xyz="0 ${-(wheel_length+width)/2} ${wheel_radius}" rpy="0 0 0" />
+  </joint>
+
+  <!-- BACK LEFT WHEEL -->
+
+  <link name="ego_racecar/back_left_hinge">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/back_left_hinge">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+  <link name="ego_racecar/back_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <joint name="back_left_hinge_to_wheel" type="continuous">
+    <parent link="ego_racecar/back_left_hinge" />
+    <child link="ego_racecar/back_left_wheel" />
+    <origin xyz="0 0.05 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+  <gazebo reference="ego_racecar/back_left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <joint name="base_to_back_left_wheel" type="fixed">
+    <parent link="ego_racecar/body" />
+    <child link="ego_racecar/back_left_hinge" />
+    <origin xyz="0 ${(wheel_length+width)/2} ${wheel_radius}" rpy="0 0 0" />
+  </joint>
+
+  <!-- FRONT RIGHT HINGE -->
+  <link name="ego_racecar/front_right_hinge">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/front_right_hinge">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <joint name="base_to_front_right_hinge" type="revolute">
+    <parent link="ego_racecar/body" />
+    <child link="ego_racecar/front_right_hinge" />
+    <origin xyz="${wheelbase} ${-(wheel_length+width)/2} ${wheel_radius}" />
+    <axis xyz="0 0 1" />
+    <limit effort="100" velocity="1" lower="-1" upper="1" />
+  </joint>
+
+  <!-- FRONT RIGHT WHEEL -->
+
+  <link name="ego_racecar/front_right_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="-${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/front_right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <joint name="front_right_hinge_to_wheel" type="continuous">
+    <parent link="ego_racecar/front_right_hinge" />
+    <child link="ego_racecar/front_right_wheel" />
+    <origin xyz="0 -0.05 0" rpy="0 0 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+
+  <link name="ego_racecar/front_left_hinge">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius/4}" length="${wheel_length/4}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/front_left_hinge">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <!-- FRONT LEFT HINGE -->
+  <joint name="base_to_front_left_hinge" type="revolute">
+    <parent link="ego_racecar/body" />
+    <child link="ego_racecar/front_left_hinge" />
+    <origin xyz="${wheelbase} ${(wheel_length+width)/2} ${wheel_radius}" />
+    <axis xyz="0 0 1" />
+    <limit effort="100" velocity="1" lower="-1" upper="1" />
+  </joint>
+
+
+  <!-- FRONT LEFT WHEEL -->
+
+
+  <link name="ego_racecar/front_left_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="${wheel_radius}" length="${wheel_length}" />
+      </geometry>
+      <origin rpy="${pi/2} 0 0" />
+    </collision>
+    <xacro:inertial_cylinder mass="0.1" radius="${wheel_radius}" length="${wheel_length}">
+      <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:inertial_cylinder>
+  </link>
+
+  <gazebo reference="ego_racecar/front_left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+  <joint name="front_left_hinge_to_wheel" type="continuous">
+    <parent link="ego_racecar/front_left_hinge" />
+    <child link="ego_racecar/front_left_wheel" />
+    <origin xyz="0 0.05 0" />
+    <axis xyz="0 1 0" />
+  </joint>
+
+
+  <gazebo>
+
+    <plugin name='gazebo_ros_ackermann_drive' filename='libgazebo_ros_ackermann_drive.so'>
+
+      <ros>
+        <parameter name="cmd_vel_topic" value="cmd_demo" />
+        <parameter name="odom_topic" value="odom_demo" />
+        <parameter name="distance_topic" value="distance_demo" />
+      </ros>
+
+      <update_rate>100.0</update_rate>
+
+      <!-- wheels -->
+      <front_left_joint>front_left_hinge_to_wheel</front_left_joint>
+      <front_right_joint>front_right_hinge_to_wheel</front_right_joint>
+      <rear_left_joint>back_left_hinge_to_wheel</rear_left_joint>
+      <rear_right_joint>back_right_hinge_to_wheel</rear_right_joint>
+      <left_steering_joint>base_to_front_left_hinge</left_steering_joint>
+      <right_steering_joint>base_to_front_right_hinge</right_steering_joint>
+      <steering_wheel_joint>steering_joint</steering_wheel_joint>
+
+      <!-- Max absolute steer angle for tyre in radians-->
+      <!-- Any cmd_vel angular z greater than this would be capped -->
+      <max_steer>0.6458</max_steer>
+
+      <!-- Max absolute steering angle of steering wheel -->
+      <max_steering_angle>7.85</max_steering_angle>
+
+      <!-- Max absolute linear speed in m/s -->
+      <max_speed>20</max_speed>
+
+      <!-- PID tuning -->
+      <left_steering_pid_gain>1500 0 1</left_steering_pid_gain>
+      <left_steering_i_range>0 0</left_steering_i_range>
+      <right_steering_pid_gain>1500 0 1</right_steering_pid_gain>
+      <right_steering_i_range>0 0</right_steering_i_range>
+      <linear_velocity_pid_gain>1000 0 1</linear_velocity_pid_gain>
+      <linear_velocity_i_range>0 0</linear_velocity_i_range>
+
+
+      <!-- output -->
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <publish_wheel_tf>true</publish_wheel_tf>
+      <publish_distance>true</publish_distance>
+
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+
+    </plugin>
+  </gazebo>
+
+</robot>
