@@ -1,0 +1,88 @@
+[0.009s] Invoking command in '/home/heinlarsen/school/rcCar-Docker-ros2-dashing/build/controller': DEBUGINFOD_URLS=https://debuginfod.fedoraproject.org/ RPM_PACKAGE_NAME=${RPM_PACKAGE_NAME}
+BASH_FUNC_ml%%=() {  eval "$($LMOD_DIR/ml_cmd "$@")"
+}
+BASH_FUNC_module%%=() {  if [ -z "${LMOD_SH_DBG_ON+x}" ]; then
+ case "$-" in
+ *v*x*)
+ __lmod_sh_dbg='vx'
+ ;;
+ *v*)
+ __lmod_sh_dbg='v'
+ ;;
+ *x*)
+ __lmod_sh_dbg='x'
+ ;;
+ esac;
+ fi;
+ if [ -n "${__lmod_sh_dbg:-}" ]; then
+ set +$__lmod_sh_dbg;
+ echo "Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output" 1>&2;
+ fi;
+ eval "$($LMOD_CMD shell "$@")" && eval "$(${LMOD_SETTARG_CMD:-:} -s sh)";
+ __lmod_my_status=$?;
+ if [ -n "${__lmod_sh_dbg:-}" ]; then
+ echo "Shell debugging restarted" 1>&2;
+ set -$__lmod_sh_dbg;
+ fi;
+ unset __lmod_sh_dbg;
+ return $__lmod_my_status
+} _=/usr/bin/env /usr/bin/cmake /home/heinlarsen/school/rcCar-Docker-ros2-dashing/controller -DCMAKE_INSTALL_PREFIX=/home/heinlarsen/school/rcCar-Docker-ros2-dashing/install/controller
+[0.158s] -- The C compiler identification is GNU 13.2.1
+[0.309s] -- The CXX compiler identification is GNU 13.2.1
+[0.338s] -- Detecting C compiler ABI info
+[0.452s] -- Detecting C compiler ABI info - done
+[0.477s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.478s] -- Detecting C compile features
+[0.479s] -- Detecting C compile features - done
+[0.500s] -- Detecting CXX compiler ABI info
+[0.654s] -- Detecting CXX compiler ABI info - done
+[0.664s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.664s] -- Detecting CXX compile features
+[0.664s] -- Detecting CXX compile features - done
+[0.674s] [31mCMake Error at CMakeLists.txt:19 (find_package):
+[0.674s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[0.674s]   has asked CMake to find a package configuration file provided by
+[0.674s]   "ament_cmake", but CMake did not find one.
+[0.674s] 
+[0.674s]   Could not find a package configuration file provided by "ament_cmake" with
+[0.675s]   any of the following names:
+[0.675s] 
+[0.675s]     ament_cmakeConfig.cmake
+[0.675s]     ament_cmake-config.cmake
+[0.675s] 
+[0.675s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[0.675s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[0.675s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[0.676s]   has been installed.
+[0.676s] 
+[0.676s] [0m
+[0.676s] -- Configuring incomplete, errors occurred!
+[0.679s] Invoked command in '/home/heinlarsen/school/rcCar-Docker-ros2-dashing/build/controller' returned '1': DEBUGINFOD_URLS=https://debuginfod.fedoraproject.org/ RPM_PACKAGE_NAME=${RPM_PACKAGE_NAME}
+BASH_FUNC_ml%%=() {  eval "$($LMOD_DIR/ml_cmd "$@")"
+}
+BASH_FUNC_module%%=() {  if [ -z "${LMOD_SH_DBG_ON+x}" ]; then
+ case "$-" in
+ *v*x*)
+ __lmod_sh_dbg='vx'
+ ;;
+ *v*)
+ __lmod_sh_dbg='v'
+ ;;
+ *x*)
+ __lmod_sh_dbg='x'
+ ;;
+ esac;
+ fi;
+ if [ -n "${__lmod_sh_dbg:-}" ]; then
+ set +$__lmod_sh_dbg;
+ echo "Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output" 1>&2;
+ fi;
+ eval "$($LMOD_CMD shell "$@")" && eval "$(${LMOD_SETTARG_CMD:-:} -s sh)";
+ __lmod_my_status=$?;
+ if [ -n "${__lmod_sh_dbg:-}" ]; then
+ echo "Shell debugging restarted" 1>&2;
+ set -$__lmod_sh_dbg;
+ fi;
+ unset __lmod_sh_dbg;
+ return $__lmod_my_status
+} _=/usr/bin/env /usr/bin/cmake /home/heinlarsen/school/rcCar-Docker-ros2-dashing/controller -DCMAKE_INSTALL_PREFIX=/home/heinlarsen/school/rcCar-Docker-ros2-dashing/install/controller
