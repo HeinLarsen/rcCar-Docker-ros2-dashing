@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include <memory>
+#include <inttypes.h>
 
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
@@ -26,15 +27,24 @@ public:
   : Node("minimal_subscriber")
   {
     subscription_ = this->create_subscription<geometry_msgs::msg::Twist>(
-      "cmd_vel", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+      "cmd_vel_joy", 10, std::bind(&MinimalSubscriber::topic_callback, this, _1));
+
+
   }
 
 private:
-  void topic_callback(const geometry_msgs::msg::Twist::SharedPtr msg) const
+  void topic_callback(const geometry_msgs::msg::Twist::SharedPtr msg)
   {
-    RCLCPP_INFO(this->get_logger(), "Linear: <%f, %f, %f>\nAngular: <%f, %f, %f>", msg->linear.x, msg->linear.y, msg->linear.z, msg->angular.x, msg->angular.y, msg->angular.z);
+    velocity_ = msg->linear.x;
+    turn_ = msg->angular.z;
+    RCLCPP_INFO(this->get_logger(), "Velocity: %f\n", velocity_);
+    RCLCPP_INFO(this->get_logger(), "Turn: %f\n", turn_);
   }
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr subscription_;
+  double velocity_ = 0.0;
+  double turn_ = 0.0;
+  int freq_hz_ = 10;
+  uint64_t time;
 };
 
 int main(int argc, char * argv[])
