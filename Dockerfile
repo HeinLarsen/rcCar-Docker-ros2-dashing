@@ -24,7 +24,10 @@ RUN apt-get update --fix-missing && \
   ros-dashing-gazebo11-* \
   curl \
   ros-dashing-slam-toolbox \
-  ros-dashing-robot-localization
+  ros-dashing-robot-localization \
+  joystick \
+  jstest-gtk \
+  evtest
 
 # Check dependencies for libgazebo11
 RUN apt-get update && \

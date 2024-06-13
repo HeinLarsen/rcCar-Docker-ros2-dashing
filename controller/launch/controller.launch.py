@@ -16,7 +16,8 @@ def generate_launch_description():
             package='joy',
             node_executable='joy_node',
             parameters=[{
-                'device_id': 0,
+                'dev_name': 'Microsoft X-Box One pad (Firmware 2015)',
+                'default_trig_val': True,
                 'deadzone': 0.05,
                 'autorepeat_rate': 20.0
                 }, {'use_sim_time': use_sim_time}],
@@ -29,10 +30,10 @@ def generate_launch_description():
             name='teleop_node',
             parameters=[{
             'axis_linear.x': 4,
-            'scale_linear.x': 1.0,
+            'scale_linear.x': 0.5,
             'scale_linear_turbo.x': 1.0,
             'axis_angular.yaw': 0,
-            'scale_angular.yaw': 0.5,
+            'scale_angular.yaw': 1.0,
             'scale_angular_turbo.yaw': 1.0,
             'enable_button': 5,
             'enable_turbo_button': 4,
