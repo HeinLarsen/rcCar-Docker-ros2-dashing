@@ -1,8 +1,9 @@
+import os
+
 from launch import LaunchDescription
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
-import os
 from ament_index_python.packages import get_package_share_directory
 
 
@@ -10,7 +11,8 @@ def generate_launch_description():
 
   use_sim_time = LaunchConfiguration('use_sim_time')
 
-  joy_params = os.path.join(get_package_share_directory('controller'),'config','joystick.yaml')
+  urdf = os.path.join(get_package_share_directory('controller'),
+                        'launch', 'robot.urdf.xml')
   
   joy_node = Node(
             package='joy',
@@ -41,6 +43,21 @@ def generate_launch_description():
             {'use_sim_time': use_sim_time}],
             remappings=[('/cmd_vel','/cmd_vel_joy')]
          )
+  
+  robot_state_publisher_node = Node(
+        package='robot_state_publisher',
+        node_executable='robot_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}],
+	    arguments=[urdf]
+        )
+    
+  joint_state_publisher = Node(
+        package='joint_state_publisher',
+        node_executable='joint_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time}]
+    )
 
 
   return LaunchDescription([
@@ -50,5 +67,7 @@ def generate_launch_description():
             description='Use sim time if true'),
         joy_node,
         teleop_node,
+        robot_state_publisher_node,
+        joint_state_publisher
         # twist_stamper       
     ])
