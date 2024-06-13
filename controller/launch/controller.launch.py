@@ -15,7 +15,11 @@ def generate_launch_description():
   joy_node = Node(
             package='joy',
             node_executable='joy_node',
-            parameters=[joy_params, {'use_sim_time': use_sim_time}],
+            parameters=[{
+                'device_id': 0,
+                'deadzone': 0.05,
+                'autorepeat_rate': 20.0
+                }, {'use_sim_time': use_sim_time}],
          )
 
 
