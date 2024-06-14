@@ -58,6 +58,18 @@ def generate_launch_description():
         output='screen',
         parameters=[{'use_sim_time': use_sim_time}]
     )
+  
+  robot_localization_node = Node(
+        package='robot_localization',
+        node_executable='ekf_node',
+        output='screen'
+  )
+  
+  slam_toolbox_node = Node(
+        package='slam_toolbox',
+        node_executable='async_slam_toolbox_node',
+        output='screen'
+    )
 
 
   return LaunchDescription([
@@ -68,6 +80,8 @@ def generate_launch_description():
         joy_node,
         teleop_node,
         robot_state_publisher_node,
-        joint_state_publisher
+        joint_state_publisher,
+        robot_localization_node,
+        slam_toolbox_node
         # twist_stamper       
     ])
